@@ -1,0 +1,22 @@
+CC = gcc
+CFLAGS = -Wall -Wextra -pedantic -std=c11
+LDFLAGS =
+
+SRCS = factorial.c main.c
+OBJS = $(SRCS:.c=.o)
+DEPS = factorial.h
+
+TARGET = factorial
+
+.PHONY: all clean
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+    $(CC) $(LDFLAGS) -o $@ $^
+
+%.o: %.c $(DEPS)
+    $(CC) $(CFLAGS) -c -o $@ $<
+
+clean:
+    rm -f $(OBJS) $(TARGET)
